@@ -1,5 +1,4 @@
 module.exports = {
-    database:"mongodb://localhost/paninistickersdb",
-    database_online:"DatabaseNameAndAccount",
+    database:"DatabaseNameAndAccount",
     secrit:"mysct"
 }
