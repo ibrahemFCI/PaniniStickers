@@ -1,0 +1,67 @@
+extends layout
+
+block content
+        .row
+          .col-sm-12
+            != messages('message', locals)
+            if(errors)
+              each error ,i in errors
+                  div(class="alert alert-danger") #{error.msg}
+            
+              .table-responsive
+                table.teams
+                  - var n=0;
+                  each country in book.countries
+                    tr
+                      td=country.name
+                      - for(var i = 0; i < country.players_no; i++) {
+                        
+                        
+                        
+                            if(user_collections!=null)
+                                each image in user_collections
+                                    if(image == n+1)
+                                        - c_checked = true;
+
+                            if(user_doubles!=null)
+                                each image in user_doubles
+                                    if(image == n+1)
+                                        - d_checked = true;
+
+                            
+
+                          
+
+                            if(c_checked)
+                              td.c_checked
+                                .checkbox
+                                  label
+                                    input.c_checked(type='checkbox', name='images' id=++n, value=n, checked)
+                                    | #{n}
+                            else if(d_checked)
+                                    td.d_checked
+                                        .checkbox
+                                            label
+                                                input.d_checked(type='checkbox', name='images' id=++n, value=n, checked)
+                                                | #{n}
+                            else
+                              td
+                                .checkbox
+                                  label
+                                    input(type='checkbox', name='images' id=++n, value=n)
+                                    | #{n}
+
+                            - c_checked = false;
+                            - d_checked = false;
+                      - }       
+              br
+              br
+              .submitgroup.inner
+                
+                a.submitBtn(title='Search', href='/search') Search
+                  
+              br
+              br
+      
+        .clearfix
+

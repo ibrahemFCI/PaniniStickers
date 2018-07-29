@@ -1,0 +1,54 @@
+extends layout
+
+block content
+        .row
+          .col-sm-12
+            != messages('message', locals)
+            if(errors)
+              each error ,i in errors
+                  div(class="alert alert-danger") #{error.msg}
+            form.doubles(action="/doubles", method="POST")
+              .table-responsive
+                table.teams
+                  - var n=0;
+                  each country in book.countries
+                    tr
+                      td=country.name
+                      - for(var i = 0,checked = false; i < country.players_no; i++) {
+                        
+                        
+                        
+                          
+                            if(user_images!=null)
+                              each image in user_images
+                                if(image == n+1)
+                                  - checked = true;
+
+                            
+
+                          
+
+                            if(checked)
+                              td.d_checked
+                                .checkbox
+                                  label
+                                    input.d_checked(type='checkbox', name='images' id=++n, value=n, checked)
+                                    | #{n}
+                            else
+                              td
+                                .checkbox
+                                  label
+                                    input(type='checkbox', name='images' id=++n, value=n)
+                                    | #{n}
+
+                            - checked = false;
+                      - }       
+              br
+              br
+              .submitgroup.inner
+                input.submitBtn(type='submit', value='Save')
+              br
+              br
+      
+        .clearfix
+
